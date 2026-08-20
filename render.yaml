@@ -21,8 +21,6 @@ services:
       - key: LOG_LEVEL
         value: INFO
 
-      - key: OPENAI_API_KEY
-        sync: false
 
   # ─── React Dashboard ────────────────────────────────
   - type: web
