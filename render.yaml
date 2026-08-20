@@ -28,7 +28,6 @@ services:
   - type: web
     name: trust-verifier-dashboard
     runtime: static
-    plan: free
 
     buildCommand: cd dashboard && npm install && npm run build
     staticPublishPath: dashboard/dist
