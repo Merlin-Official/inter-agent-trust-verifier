@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-bg: #0f172a;
+  --color-dark-card: #1e293b;
+  --color-dark-border: #334155;
+  --color-dark-text: #f8fafc;
+  --color-dark-muted: #94a3b8;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #2563eb;
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.1);
+  --color-warning: #f59e0b;
+  --color-warning-bg: rgba(245, 158, 11, 0.1);
+  --color-danger: #ef4444;
+  --color-danger-bg: rgba(239, 68, 68, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-dark-text antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-dark-card border border-dark-border rounded-xl shadow-lg;
+  }
+
+  .btn-primary {
+    @apply bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply bg-dark-card hover:bg-slate-700 border border-dark-border text-dark-text px-4 py-2 rounded-lg font-medium transition-colors;
+  }
+
+  .btn-danger {
+    @apply bg-danger/20 hover:bg-danger/30 border border-danger/50 text-red-400 px-4 py-2 rounded-lg font-medium transition-colors;
+  }
+
+  .badge {
+    @apply px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  }
+
+  .badge-success {
+    @apply bg-success-bg text-success border border-success/30;
+  }
+
+  .badge-danger {
+    @apply bg-danger-bg text-danger border border-danger/30;
+  }
+
+  .badge-warning {
+    @apply bg-warning-bg text-warning border border-warning/30;
+  }
+
+  .badge-info {
+    @apply bg-blue-500/10 text-blue-400 border border-blue-500/30;
+  }
+}

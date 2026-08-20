@@ -1,0 +1,62 @@
+{
+    "family": "trust-verifier-api",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "1024",
+    "executionRoleArn": "arn:aws:iam::ACCOUNT_ID:role/ecsTaskExecutionRole",
+    "taskRoleArn": "arn:aws:iam::ACCOUNT_ID:role/ecsTaskRole",
+    "containerDefinitions": [
+        {
+            "name": "trust-verifier-api",
+            "image": "ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/trust-verifier-api:latest",
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "protocol": "tcp"
+                }
+            ],
+            "environment": [
+                {
+                    "name": "LOG_LEVEL",
+                    "value": "INFO"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "DATABASE_URL",
+                    "valueFrom": "arn:aws:ssm:us-east-1:ACCOUNT_ID:parameter/trust-verifier/database-url"
+                },
+                {
+                    "name": "SECRET_KEY",
+                    "valueFrom": "arn:aws:ssm:us-east-1:ACCOUNT_ID:parameter/trust-verifier/secret-key"
+                },
+                {
+                    "name": "OPENAI_API_KEY",
+                    "valueFrom": "arn:aws:ssm:us-east-1:ACCOUNT_ID:parameter/trust-verifier/openai-api-key"
+                }
+            ],
+            "healthCheck": {
+                "command": [
+                    "CMD-SHELL",
+                    "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\" || exit 1"
+                ],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3,
+                "startPeriod": 10
+            },
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/trust-verifier",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "api"
+                }
+            },
+            "essential": true
+        }
+    ]
+}

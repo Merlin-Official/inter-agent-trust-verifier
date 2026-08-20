@@ -1,0 +1,59 @@
+# ============================================
+# Inter-Agent Trust Verifier — Docker Compose
+# Full production stack: API + PostgreSQL + Dashboard
+# ============================================
+
+version: "3.9"
+
+services:
+  # ─── PostgreSQL Database ─────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: trust-verifier-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: trust_verifier
+      POSTGRES_USER: trust_admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme_in_production}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U trust_admin -d trust_verifier" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ─── FastAPI Trust Engine ────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trust-verifier-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://trust_admin:${DB_PASSWORD:-changeme_in_production}@db:5432/trust_verifier
+      SECRET_KEY: ${SECRET_KEY:-super-secret-key-change-in-production}
+      LOG_LEVEL: INFO
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # ─── React Dashboard ────────────────────────────────
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: trust-verifier-dashboard
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:

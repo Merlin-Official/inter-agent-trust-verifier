@@ -1,0 +1,40 @@
+﻿node.exe : npm warn 
+deprecated 
+recharts@2.15.4: 
+1.x and 2.x 
+branches are no 
+longer active. Bump 
+to Recharts v3 to 
+receive latest 
+features and 
+bugfixes. See https:
+//github.com/rechart
+s/recharts/wiki/3.0-
+migration-guide
+At line:1 char:1
++ & "C:\Program File
+s\nodejs/node.exe" 
+"C:\Program Files\no
+dejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~
+    + CategoryInfo  
+            : NotS  
+  pecified: (npm    
+ warn deprec...m    
+igration-guide:    
+String) [], Rem    
+oteException
+    + FullyQualifie 
+   dErrorId : Nati  
+  veCommandError
+ 
+
+added 153 packages, and audited 154 packages in 31s
+
+21 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities

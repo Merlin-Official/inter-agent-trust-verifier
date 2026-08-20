@@ -1,0 +1,41 @@
+============================= test session starts =============================
+platform win32 -- Python 3.10.11, pytest-8.3.4, pluggy-1.6.0 -- C:\Users\Merlin\OneDrive\Documents\Desktop\Inter-Agent Trust Verifier\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Merlin\OneDrive\Documents\Desktop\Inter-Agent Trust Verifier
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-0.25.0, cov-6.0.0
+asyncio: mode=auto, asyncio_default_fixture_loop_scope=function
+collecting ... collected 28 items
+
+tests/test_trust_verifier.py::TestCryptoOperations::test_generate_keypair PASSED [  3%]
+tests/test_trust_verifier.py::TestCryptoOperations::test_sign_and_verify PASSED [  7%]
+tests/test_trust_verifier.py::TestCryptoOperations::test_verify_wrong_key_fails PASSED [ 10%]
+tests/test_trust_verifier.py::TestCryptoOperations::test_verify_tampered_message_fails PASSED [ 14%]
+tests/test_trust_verifier.py::TestCryptoOperations::test_canonical_json_deterministic PASSED [ 17%]
+tests/test_trust_verifier.py::TestSignedInstruction::test_create_signed_instruction PASSED [ 21%]
+tests/test_trust_verifier.py::TestSignedInstruction::test_instruction_signature_verifiable PASSED [ 25%]
+tests/test_trust_verifier.py::TestDelegationTokens::test_create_delegation_token PASSED [ 28%]
+tests/test_trust_verifier.py::TestDelegationTokens::test_expired_token PASSED [ 32%]
+tests/test_trust_verifier.py::TestDelegationTokens::test_valid_token_not_expired PASSED [ 35%]
+tests/test_trust_verifier.py::TestDelegationTokens::test_action_in_scope PASSED [ 39%]
+tests/test_trust_verifier.py::TestDelegationTokens::test_wildcard_scope PASSED [ 42%]
+tests/test_trust_verifier.py::TestTrustVerifier::test_valid_instruction_accepted PASSED [ 46%]
+tests/test_trust_verifier.py::TestTrustVerifier::test_tampered_instruction_rejected PASSED [ 50%]
+tests/test_trust_verifier.py::TestTrustVerifier::test_scope_exceeded_rejected PASSED [ 53%]
+tests/test_trust_verifier.py::TestTrustVerifier::test_revoked_agent_rejected PASSED [ 57%]
+tests/test_trust_verifier.py::TestTrustVerifier::test_expired_delegation_rejected PASSED [ 60%]
+tests/test_trust_verifier.py::TestTrustVerifier::test_receiver_policy_rejected PASSED [ 64%]
+tests/test_trust_verifier.py::TestTrustVerifier::test_reputation_below_threshold_rejected PASSED [ 67%]
+tests/test_trust_verifier.py::TestAPIEndpoints::test_health_check PASSED [ 71%]
+tests/test_trust_verifier.py::TestAPIEndpoints::test_readiness_check PASSED [ 75%]
+tests/test_trust_verifier.py::TestAPIEndpoints::test_register_agent PASSED [ 78%]
+tests/test_trust_verifier.py::TestAPIEndpoints::test_duplicate_agent_rejected PASSED [ 82%]
+tests/test_trust_verifier.py::TestAPIEndpoints::test_list_agents PASSED  [ 85%]
+tests/test_trust_verifier.py::TestAPIEndpoints::test_full_flow_accepted PASSED [ 89%]
+tests/test_trust_verifier.py::TestAPIEndpoints::test_full_flow_revoked_rejected PASSED [ 92%]
+tests/test_trust_verifier.py::TestAPIEndpoints::test_audit_trail_recorded PASSED [ 96%]
+tests/test_trust_verifier.py::TestAPIEndpoints::test_dashboard_stats PASSED [100%]
+
+============================= 28 passed in 9.38s ==============================
+
+ERR====
